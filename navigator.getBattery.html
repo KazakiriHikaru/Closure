@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>navigator.getBattery</title>
+    <style>
+        .container {
+            height: 100%;
+            background-color: #000;
+            color: #FFF;
+        }
+    </style>
+</head>
+
+<body class="container">
+    <p style="text-align:center;">
+        <script>
+            document.write(document.title + " " + document.lastModified);
+        </script>
+    </p>
+    <br />
+    <script>
+        //console
+        navigator.getBattery().then(function(battery) {
+            console.log(battery);
+        });
+
+        //https://w3c.github.io/battery/
+        function BatteryStatus(w3cbattery) {
+            document.querySelector('#charging').textContent = "charging" + ": " + (w3cbattery.charging ? "Yes" :
+                "No");
+            //document.querySelector('#chargingTime') = "chargingTime" + ": " + w3cbattery.chargingTime + " seconds";
+            //document.querySelector('#dischargingTime') =  "dischargingTime" + ": " + w3cbattery.dischargingTime + " seconds";
+            document.querySelector('#level').textContent = "level " + ": " + w3cbattery.level * 100 + "%";
+        }
+        navigator.getBattery().then(function(w3cbattery) {
+            BatteryStatus(w3cbattery);
+        });
+
+        //getBattery
+        navigator.getBattery().then(function(getBattery) {
+            document.querySelector('#Charging').textContent = "Charging: " + getBattery.charging;
+            document.querySelector('#Level').textContent = "Level: " + getBattery.level * 100 + "%";
+        });
+    </script>
+    <h2>console.log</h2>
+    <br />
+    <h2>https://w3c.github.io/battery/</h2>
+    <p id="charging"></p>
+    <p id="chargingTime"></p>
+    <p id="dischargingTime"></p>
+    <p id="level"></p>
+    <br />
+    <h2>getBattery</h2>
+    <p id="Charging"></p>
+    <p id="Level"></p>
+    </div>
+</body>
+
+</html>
