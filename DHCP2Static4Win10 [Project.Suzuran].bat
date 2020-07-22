@@ -1,16 +1,30 @@
 @echo off
+title DHCP2Static4Win10Lite [Project.Suzuran] by Kazakiri Hikaru / @lphaVersion / 2020.07.23
+echo.
+echo ç¡®å®šå¼€å§‹å°†DHCPè½¬ä¸ºé™æ€IPè®¾å®šï¼Ÿ
+echo.
+pause
+for /f "tokens=16,*" %%i in ('ipconfig ^| find /i "IPv4"') do set IPv4=%%i
+for /f "tokens=15,*" %%m in ('ipconfig ^| find /i "æ©ç "') do set Mask=%%m
+for /f "tokens=15,*" %%g in ('ipconfig ^| find /i "ç½‘å…³"') do set Gateway=%%g
+echo æ­£åœ¨è½¬æ¢å¹¶å°†ç½‘å…³è®¾å®šä¸ºDNS
+netsh interface ip set address "ä»¥å¤ªç½‘" static %IPv4% %Mask% %Gateway%
+netsh interface ip set dns "ä»¥å¤ªç½‘" static %Gateway% validate=no
+echo OKï¼
+
+@echo off
 title DHCP2Static4Win10 [Project.Suzuran] by Kazakiri Hikaru / @lphaVersion / 2020.07.23
 for /f "tokens=16,*" %%i in ('ipconfig ^| find /i "IPv4"') do set IPv4=%%i
 echo %IPv4%
-for /f "tokens=15,*" %%m in ('ipconfig ^| find /i "ÑÚÂë"') do set Mask=%%m
+for /f "tokens=15,*" %%m in ('ipconfig ^| find /i "æ©ç "') do set Mask=%%m
 echo %Mask%
-for /f "tokens=15,*" %%g in ('ipconfig ^| find /i "Íø¹Ø"') do set Gateway=%%g
+for /f "tokens=15,*" %%g in ('ipconfig ^| find /i "ç½‘å…³"') do set Gateway=%%g
 echo %Gateway%
-echo È·ÈÏ£¿
+echo ç¡®è®¤ï¼Ÿ
 pause
-echo ÕıÔÚ×ª»»²¢½«Íø¹ØÉè¶¨ÎªDNS
-netsh interface ip set address "ÒÔÌ«Íø" static %IPv4% %Mask% %Gateway%
-netsh interface ip set dns "ÒÔÌ«Íø" static %Gateway% validate=no
-echo Éè¶¨Íê³É£¡
+echo æ­£åœ¨è½¬æ¢å¹¶å°†ç½‘å…³è®¾å®šä¸ºDNS
+netsh interface ip set address "ä»¥å¤ªç½‘" static %IPv4% %Mask% %Gateway%
+netsh interface ip set dns "ä»¥å¤ªç½‘" static %Gateway% validate=no
+echo è®¾å®šå®Œæˆï¼
 ipconfig -all
 pause
